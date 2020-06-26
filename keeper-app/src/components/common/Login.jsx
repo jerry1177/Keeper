@@ -4,8 +4,8 @@ import AlerMessage from './AlertMessage';
 
 function Login() {
     const [formState, setFormState] = useState({
-        email: '',
-        password: ''
+        email: null,
+        password: null
     });
 
     const [isValidInput, setIsValidInput] = useState(true);
@@ -15,7 +15,8 @@ function Login() {
     function validate(e) {
         e.preventDefault();
         const { email, password } = formState;
-        if (!email.trim() || !password.trim() || password.length < 8) {
+        
+        if (!email || !password || !email.trim() || !password.trim() || password.length < 8) {
             setIsValidInput(false);
             setAlertMessage("Invalid Username or Password!")
             setShowMessage(true);

@@ -7,6 +7,7 @@ function CreateArea(props) {
 
   const [note, setNote] = useState({ updated: true, edited: false, title: "", content: ""});
   const [isExpanded, setExpanded] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
 
   function changeHandler(event) {
      const name = event.target.name;
@@ -21,8 +22,9 @@ function CreateArea(props) {
 
   function addClicked(event) {
     event.preventDefault(); // dont forget this or page will refresh!
+    if (!note.title.trim() || !note.content.trim() || isWaiting) return;
     props.addNote(note);
-    setNote({ title: "", content: ""})       
+    setNote({ updated: true, edited: false, title: "", content: ""})       
   }
   function expand() {
     setExpanded(true);
